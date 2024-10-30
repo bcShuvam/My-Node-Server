@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  },
+  "name": "my_node_server",
+  "version": "1.0.0",
+  "description": "This is a server made for learning purpose, in this node server i will try to create a user with roles",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server",
+    "start": "nodemon server"
+  },
+  "author": "Shuvam BC",
+  "license": "ISC"
+}
