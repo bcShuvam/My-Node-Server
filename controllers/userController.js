@@ -15,7 +15,11 @@ const getAllUsers = (req, res) => {
     return res
       .status(200)
       .json({ message: "User db is empty", users: usersDB.users });
-  res.status(200).json({ message: "success", users: usersDB.users });
+  const sortedUsers = usersDB.users.map((user) => ({
+    username: user.username,
+    roles: user.roles,
+  }));
+  res.status(200).json({ message: "success", users: sortedUsers });
 };
 
 const createUser = async (req, res) => {
@@ -74,7 +78,13 @@ const getAnUser = (req, res) => {
   const id = parseInt(req.params.id);
   const foundUser = usersDB.users.find((person) => person.id === id);
   if (!foundUser) return res.status(200).json({ message: "no such user" });
-  res.status(200).json({ message: "success", id: foundUser });
+  res.status(200).json({
+    message: "success",
+    user: {
+      username: foundUser.username,
+      roles: foundUser.roles,
+    },
+  });
 };
 
 module.exports = { getAllUsers, createUser, getAnUser };
