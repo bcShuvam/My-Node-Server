@@ -66,12 +66,18 @@ const createUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  // res.status(200).json({
-  //   message: "Success",
-  //   username: username,
-  //   password: password,
-  //   roles: roles,
-  // });
+};
+
+const updateUser = (req, res) => {
+  const id = parseInt(req.body.id);
+  const foundUserId = usersDB.users.find((person) => person.id === id);
+  if (!foundUserId)
+    return res.status(400).json([{ message: `user with id ${id} not found` }]);
+  const foundUser = {
+    username: foundUserId.username,
+    roles: foundUserId.roles,
+  };
+  res.status(200).json([{ message: "success", user: foundUser }]);
 };
 
 const getAnUser = (req, res) => {
@@ -87,4 +93,4 @@ const getAnUser = (req, res) => {
   });
 };
 
-module.exports = { getAllUsers, createUser, getAnUser };
+module.exports = { getAllUsers, createUser, updateUser, getAnUser };
