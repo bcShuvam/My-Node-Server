@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const veriftJWT = require("./middleware/verifyJWT");
 require("dotenv").config();
 const PORT = process.env.PORT || 3500;
 
@@ -10,6 +11,10 @@ app.use(express.urlencoded({ extended: false }));
 
 // built-in middleware for json
 app.use(express.json());
+
+app.use("/login", require("./routes/auth"));
+
+app.use(veriftJWT);
 
 app.use("/user", require("./routes/users"));
 app.use("/roles", require("./routes/roles"));
